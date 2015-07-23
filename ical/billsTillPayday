@@ -1,0 +1,32 @@
+#! /bin/bash
+
+DIR="/Users/jagagne/Documents/scripts/ical"
+touch $DIR/txt1.out
+
+# use iCalBuddy to find the next payday
+PAYDAY=$(/usr/local/bin/icalBuddy -iep "title,datetime" -ps "| : |" eventsToday+14 | grep Payday | awk '{print $7+0}')
+
+# then use that payday day to create the icalbuddy date range
+/usr/local/bin/icalBuddy eventsFrom:TODAY to:$PAYDAY > txt1.out
+
+# read the output from running iCalBuddy, filter on the bills, pull the amounts, and enter those amounts into an array
+	output=$(cat $DIR/txt1.out | grep NASA | awk '{print $3}')
+	declare -a output
+	
+	for i in $output
+		do
+		array[$i]=${i}
+	done
+
+# iterate through the array and provide the total for the date range 
+	sum=0
+	for i in $output
+		do
+		sum=$(($sum + ${array[i]}))
+	done
+	echo "$"$sum "in bills due until the next payday on $PAYDAY `date | awk {'print $2'}`"
+
+# cleanup after yourself
+rm -rf $DIR/txt1.out
+
+exit

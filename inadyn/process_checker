@@ -1,0 +1,24 @@
+#! /bin/bash 
+
+PID="`pgrep inadyn`"
+REFRESH="/var/log/inadyn_refresh"
+
+rm -rf $REFRESH
+touch $REFRESH
+
+`date` > $REFRESH
+
+echo $PID 
+if [ -n "$PID" ]; then 
+	echo "Inadyn was already running on PID: $PID. I will restart." >> $REFRESH
+	pkill inadyn
+
+elif [ -z "$PID" ]; then
+	echo "Inadyn was not running so starting up now" >> $REFRESH
+
+fi
+
+echo "Running inadyn_checker" >> $REFRESH
+/usr/local/scripts/inadyn/inadyn_checker
+
+exit 0	

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo -e "Content-type: text/html\n"
+
+PHRASE=`echo "$QUERY_STRING" | sed -n 's/^.*phrase=\([^&]*\).*$/\1/p' | sed "s/+/ /g" | sed "s/%20/ /g"`
+DEVICE=`echo "$QUERY_STRING" | sed -n 's/^.*device=\([^&]*\).*$/\1/p' | sed "s/+/ /g" | sed "s/%20/ /g"`
+#OFF=`curl -u jagagne:P1ngP0ng -s http://192.168.1.100/rest/nodes/19%2058%2055%201/cmd/DOF`
+ON=`curl -u jagagne:P1ngP0ng -s http://192.168.1.100/rest/nodes/19%2058%2055%201/cmd/DON`
+
+cat << junk
+<html>
+<head>
+<title>
+saying
+</title>
+</head>
+<body>
+junk
+#-----------------------
+
+say -v vicki "$PHRASE $off" 
+
+#-----------------------
+cat << junk
+</body>
+</html>
+junk

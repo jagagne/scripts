@@ -1,0 +1,34 @@
+#! /bin/bash
+
+DIR="/Users/jagagne/Documents/scripts/ical"
+touch $DIR/txt.out
+
+echo "Enter how many days from today I should add up the total bills due"
+	read days
+
+# use iCalBuddy to create the date range and get all the events in that range
+/usr/local/bin/icalBuddy eventsToday+$days > txt.out
+
+# read the output from running iCalBuddy, filter on the bills, pull the amounts, and enter those amounts into an array
+	output=$(cat txt.out | grep NASA | awk '{print $3}')
+	declare -a output
+	
+	for i in $output
+		do
+		array[$i]=${i}
+	done
+
+# iterate through the array and provide the total for the date range 
+	sum=0
+	for i in $output
+		do
+		sum=$(($sum + ${array[i]}))
+	done
+	echo "$"$sum "in bills due in the next "$days" days"
+	touch $DIR/net.out
+	echo "bills $sum" >> net.out
+
+# cleanup after yourself
+rm -rf $DIR/txt.out
+
+exit

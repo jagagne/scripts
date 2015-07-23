@@ -1,0 +1,28 @@
+#! /bin/bash
+
+DIR="/Users/jagagne/Documents/scripts/ical"
+
+# make sure we're starting off clean
+rm -rf $DIR/net.out
+
+echo "Enter how much money you have in your bank accounts"
+read bank
+
+echo "Enter a variance (gas, food, etc.)"
+read variance
+
+# run the scripts
+$DIR/billsUserDefined && $DIR/payUserDefined
+
+# assign to variables
+bills=$(cat $DIR/net.out | grep bills | awk '{print $2}')
+pay=$(cat $DIR/net.out | grep pay | awk '{print $2}')
+
+# do math
+sum="$((($bank + $pay) - $bills - $variance))"
+echo "$"$sum "Net over the date range you gave"
+
+# clean up after yourself
+rm -rf $DIR/net.out
+
+exit

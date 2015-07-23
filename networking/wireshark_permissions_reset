@@ -1,0 +1,4 @@
+#! /bin/bash
+
+chown -R root:wheel /Applications/Networks/wireshark/Utilities/ChmodBPF/
+chmod 644 /dev/bpf*

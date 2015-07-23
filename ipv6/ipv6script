@@ -1,0 +1,93 @@
+#!/bin/bash
+#######################################################################
+# Update the HE (Hurricane Electric) ipv6-tunnel
+#######################################################################
+# Interfaces to try, in order: en1 = Airport, en0 = Ethernet
+MYIFS="en0 en1"
+
+# leave as is
+IPCACHE="/Library/Caches/ipv6scriptIP"
+
+# Your Tunnel settings start here
+# 1. get HEUSER hash from the website, "UserID"
+# 2. get HEPASS hash: echo -n YourPass|md5
+# 3. get HETUNNEL from the website, "Global Tunnel ID"
+# 4. get other settings from the website
+
+HEUSER=tb4f7f4a492e3291.51826656
+HEPASS=68751019714602267c66a45f9e379036
+HETUNNEL=159787
+
+HETUNEND=216.66.22.2
+HEYOUR6END=2001:470:7:12d0::2
+HETHEIR6END=2001:470:7:12d0::1
+HEPREFIX=64
+
+# This is some IP from the "Routed /64" pool, used for outgoing connections from your Mac.
+# Should it get blocked by anyone, you can simply change it to any other IP from the pool
+# without having to apply for a new tunnel. e.g. if your Routed /64 pool is 
+# 2001:0123:123b:1234::/64, you can use this for your IP:
+
+HEMY64IP=2001:470:7:12d0::0bad:cafe
+
+#######################################################################
+# Config end
+#######################################################################
+# sometimes this script will get executed twice at the same time, not good, so:
+if [ -f $IPCACHE.lock ] ; then
+  echo A copy already running!
+  exit 0
+else
+ touch $IPCACHE.lock
+fi
+# This is faster if your router sets a dyndns entry:
+#NEW_IP=`dig mycomp.myvnc.com|grep "^mycomp"| grep -Eo "\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>"`
+NEW_IP=`curl -s "http://www.networksecuritytoolkit.org/nst/cgi-bin/ip.cgi"`
+
+# Wait for the network...
+while [ ! -n "$NEW_IP" ]
+do
+	sleep 10
+  #NEW_IP=`dig mycomp.myvnc.com|grep "^mycomp"| grep -Eo "\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>"`
+  NEW_IP=`curl -s "http://www.networksecuritytoolkit.org/nst/cgi-bin/ip.cgi"`
+done
+
+
+OLD_IP=`cat $IPCACHE`
+if [ "$NEW_IP" = "$OLD_IP" ] ; then
+	CURCONF=`ifconfig |grep $HETUNEND`
+   if [ -n "$CURCONF" ] ; then
+		echo Nothing to do
+		rm $IPCACHE.lock
+		exit 0
+	fi
+fi
+
+echo -n $NEW_IP > $IPCACHE
+
+# if you need to use your public ip address, use LOCAL_IP=$NEW_IP instead
+for myif in $MYIFS; do
+	LOCAL_IP=`ifconfig $myif |grep -E 'inet.[0-9]' | grep -v '127.0.0.1' | awk '{ print $2}'`
+	if [ -n "$LOCAL_IP" ]; then break; fi
+done
+
+
+# let's delete a pre-existing gif0, ignore any errors
+ifconfig gif0 deletetunnel
+ifconfig gif0 down
+ifconfig gif0 inet6 $HEYOUR6END delete
+ifconfig gif0 inet6 $HEMY64IP delete
+route delete -inet6 default -interface gif0
+
+# update the tunnel
+curl -k -s "https://ipv4.tunnelbroker.net/ipv4_end.php?ipv4b=$NEW_IP&pass=$HEPASS&user_id=$HEUSER&tunnel_id=$HETUNNEL"
+echo " "
+
+sleep 1
+ifconfig gif0 tunnel $LOCAL_IP $HETUNEND
+ifconfig gif0 inet6 $HEMY64IP/64 alias
+ifconfig gif0 inet6 $HEYOUR6END $HETHEIR6END prefixlen /$HEPREFIX
+route -n add -inet6 default $HETHEIR6END
+
+rm $IPCACHE.lock
+exit 0

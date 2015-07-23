@@ -1,0 +1,13 @@
+#! /bin/bash
+
+# Not finished. Things to think about; implement without cron so I'm not spawning multiple instances of this script. 
+
+time=`echo $RANDOM | cut -c1-4`
+
+until [ "$time" = 0 ]
+do
+clear
+echo "$time"
+time=`expr $time - 1`
+sleep 1
+done

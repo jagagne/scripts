@@ -1,0 +1,11 @@
+tunnel info is at: tunnelbroker.net
+with these login creds: jagagne/P1ngP0ng
+bridge/gif0 config script is in /usr/local/bin
+and startup script at: /Library/LaunchDaemons/net.myipv6script.plist
+
+load/unload w/:
+
+sudo launchctl load /Library/LaunchDaemons/net.myipv6script.plist
+
+
+Also, DNS6 will only work in mavericks if the v6 conifgs are available via the nnetworks preferences. the tunnel (gif0) doesn't actually use these preferences, so you need to update the v6 address manually in preferences. 

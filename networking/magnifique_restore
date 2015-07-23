@@ -1,0 +1,75 @@
+#!/bin/sh
+
+if [ "`whoami`" != "root" ]; then
+        echo "Only root can run this script! Use sudo privileges"
+        exit
+fi
+echo ""
+echo "Magnifique 1.3 Command Line Restore Script"
+echo "Copyright (c) 2009 PCWiz Computer"
+echo ""
+echo "This script is ONLY for use in ABSOLUTE emergency situations. Whenever possible use the uninstaller built into the Magnifique app. Are you sure you want to restore the backup?"
+read -p "Type y for yes or leave blank to exit: " CONFIRM
+if [[ $CONFIRM == "y" ]]; then
+backupname=$(ls "/Library/Application Support/Magnifique/Backups" | sed 's/.DS_Store//' | sed 's/.localized//' | grep Backup | sed '2,$d' )
+backupfolder="/Library/Application Support/Magnifique/Backups/"${backupname}
+echo "Using $backupfolder as restore source folder..."
+echo ""
+echo "Resetting default CoreUI, ArtFile, Leopard Window settings..."
+defaults write -g AppleUseCoreUI 1
+defaults write "Apple Global Domain" CUIAllowDebugPrefs 0
+defaults write "Apple Global Domain" CUIDisableArtFile 0
+defaults write NSGlobalDomain NSUseLeopardWindowValues YES
+if [ -f "${backupfolder}/window/ArtFile.bin" ]; then
+	echo ""
+	echo "Restoring ArtFile.bin..."
+	ditto "${backupfolder}/window/ArtFile.bin" /System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/Resources/ArtFile.bin
+fi
+if [ -f "${backupfolder}/window/SArtFile.bin" ]; then
+	echo ""
+	echo "Restoring SArtFile.bin..."
+	ditto "${backupfolder}/window/SArtFile.bin" /System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/Resources/SArtFile.bin
+fi
+if [ -f "${backupfolder}/window/AquaUI.bundle" ]; then
+	echo ""
+	echo "Restoring AquaUI.bundle..."
+	ditto "${backupfolder}/window/AquaUI.bundle" /System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/Resources/AquaUI.bundle
+fi
+if [ -f "${backupfolder}/window/LeopardUI.bundle" ]; then
+	echo ""
+	echo "Restoring LeopardUI.bundle..."
+	ditto "${backupfolder}/window/LeopardUI.bundle" /System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/Resources/LeopardUI.bundle
+fi
+if [ -f "${backupfolder}/window/Extras.rsrc" ]; then
+	echo ""
+	echo "Restoring Extras.rsrc..."
+	ditto "${backupfolder}/window/Extras.rsrc" /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Resources/Extras.rsrc
+fi
+if [ -f "${backupfolder}/window/Extras2.rsrc" ]; then
+	echo ""
+	echo "Restoring Extras2.rsrc..."
+	ditto "${backupfolder}/window/Extras2.rsrc" /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Resources/Extras2.rsrc
+fi
+if [ -f "${backupfolder}/dock/Dock.app" ]; then
+	echo ""
+	echo "Restoring Dock..."
+	ditto "${backupfolder}/dock/Dock.app" /System/Library/CoreServices/Dock.app
+	chmod -R 755 /System/Library/CoreServices/Dock.app
+	chown -R root:wheel /System/Library/CoreServices/Dock.app
+fi
+if [ -f "${backupfolder}/scripts/restore" ]; then
+	echo ""
+	echo "Running custom restore script..."
+	chmod u+x "${backupfolder}/scripts/restore"
+	"${backupfolder}/scripts/restore"
+fi
+echo ""
+rm -rf "/Library/Application Support/Magnifique/magnifique.txt"
+echo ""
+echo "Script successfully completed! You may now reboot"
+exit
+else
+echo ""
+echo "Thanks for using Magnifique! Script exited"
+exit
+fi

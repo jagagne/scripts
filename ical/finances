@@ -1,0 +1,32 @@
+#! /bin/bash
+
+# iCal events standards to work with these script:
+# Bills must be assigned to the 'NASA Bills' calendar
+# Payday must be labeled 'Payday'
+# Not required, but helpful for later on, assign the location to 'bills'
+# Not required, but helpful for later on, assign the location to 'pay'
+# Not required, but helpful for later on, assign Payday to the 'Income' calendar
+# details of what the scripts this case statement calls are documented in the scripts themselves. 
+# billsUserDefined makes txt.out, net.out
+# billsTillPayday makes txt1.out
+# payUserDefined makes txt2.out, net.out
+# netQuery uses net.out
+
+DIR="/Users/jagagne/Documents/scripts/ical"
+
+echo "Choose what you want to know:"
+echo "1) Give me a date range and I'll total your bills"
+echo "2) Just tell me how much I owe until the next payday"
+echo "3) How much income in a date range"
+echo "4) Find out if you'll be in the red or not"
+
+read choices
+case $choices in
+	1) $DIR/billsUserDefined;;
+	2) $DIR/billsTillPayday;;
+	3) $DIR/payUserDefined;;
+	4) $DIR/netQuery;;
+	*) echo "Invalid option";; 
+esac
+
+exit

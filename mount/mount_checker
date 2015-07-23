@@ -1,0 +1,10 @@
+#! /bin/bash
+
+mkdir /Volumes/media
+
+if find /Volumes/media/* -maxdepth 0 -type d | read
+	then echo "mounted!"
+	else
+		mount_afp afp://[username:password]@[ipaddr/path/to/dir /mount/point/on/local
+fi
+

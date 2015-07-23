@@ -1,0 +1,44 @@
+#! /usr/bin/env bash 
+
+REFRESH="/var/log/inadyn_refresh"
+DNS="/tmp/dns_refresh"
+
+#rm -rf $REFRESH
+#touch $REFRESH
+
+echo "inadyn_checker here!" >> $REFRESH 
+
+# now that we're updated, let's check the ip checker service
+echo "Getting my external dns ip" 
+wget http://checkip.dyndns.com/
+
+# wget will download index.html to the local directory, now let's make nice
+echo "Parsing index.html and cleaning up"
+cat index.html | sed -e 's/<[^>]*>//g' | awk '{print $6}' > $DNS
+echo "My dynamic IP is: `cat $DNS`" >> $REFRESH
+rm -rf index.html $$ rm -rf $DNS
+
+# cleaning up control characters
+echo "Removing control characters from the log file"
+fromdos -d $REFRESH
+
+# run the inadyn bin script 
+echo "Starting inadyn query service" >> $REFRESH
+/usr/local/scripts/inadyn/bin/linux/inadyn &
+
+sleep 10
+
+# -n is not null, -z is null
+NEWPID="`pgrep inadyn`"
+echo $NEWPID
+if [ -n "$NEWPID" ]; then 
+        echo "Inadyn restarted successfully with PID: $NEWPID." >> $REFRESH
+	echo "Nothing to see here, everything is still working" | nail -s "Inadyn Alert" jagagne@gmail.com
+
+elif [ -z "$NEWPID" ]; then
+        echo "It looks like something went wrong. I think inadyn is either not running or using a PID of $NEWPID" >> $REFRESH
+	echo "Something went wrong and Inadyn is not running. Check /var/log/inadyn_refresh." | nail -s "Inadyn Alert" jagagne@gmail.com
+
+fi
+
+exit 0

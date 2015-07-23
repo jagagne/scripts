@@ -1,0 +1,15 @@
+#! /bin/bash
+
+LOG="/Users/jagagne/Documents/scripts/logs/vpn.log"
+
+/sbin/ifconfig | /usr/bin/grep -q utun1
+
+if [ $? == 1 ];
+	then /usr/local/bin/growlnotify -m "deimos vpn was down on `date`" 
+
+	/usr/bin/osascript /Users/jagagne/Documents/scripts/vpn/vpn_connect.scpt
+
+else 
+	echo "`/bin/date` VPN is already up!" >> $LOG 
+
+fi
