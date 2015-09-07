@@ -1,4 +1,3 @@
-import os
 from scapy.all import *
 
 def arp_display(pkt):
