@@ -1,0 +1,20 @@
+[2015-09-06 22:21:19,372][INFO ][node                     ] [Miss America] version[1.7.1], pid[34618], build[b88f43f/2015-07-29T09:54:16Z]
+[2015-09-06 22:21:19,373][INFO ][node                     ] [Miss America] initializing ...
+[2015-09-06 22:21:19,560][INFO ][plugins                  ] [Miss America] loaded [], sites []
+[2015-09-06 22:21:19,638][INFO ][env                      ] [Miss America] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [159.5gb], net total_space [232.6gb], types [hfs]
+[2015-09-06 22:21:23,493][INFO ][node                     ] [Miss America] initialized
+[2015-09-06 22:21:23,493][INFO ][node                     ] [Miss America] starting ...
+[2015-09-06 22:21:23,636][INFO ][transport                ] [Miss America] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/192.168.1.6:9300]}
+[2015-09-06 22:21:23,670][INFO ][discovery                ] [Miss America] elasticsearch/2zEmBxvoQlSfj2dHxeAT0g
+[2015-09-06 22:21:27,477][INFO ][cluster.service          ] [Miss America] new_master [Miss America][2zEmBxvoQlSfj2dHxeAT0g][strife.local][inet[/192.168.1.6:9300]], reason: zen-disco-join (elected_as_master)
+[2015-09-06 22:21:27,506][INFO ][http                     ] [Miss America] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/192.168.1.6:9200]}
+[2015-09-06 22:21:27,507][INFO ][node                     ] [Miss America] started
+[2015-09-06 22:21:27,559][INFO ][gateway                  ] [Miss America] recovered [6] indices into cluster_state
+[2015-09-06 22:22:26,632][INFO ][cluster.service          ] [Miss America] added {[logstash-strife.local-34653-11622][WfV-_60uR1uoG988DzVvFA][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-receive(join from node[[logstash-strife.local-34653-11622][WfV-_60uR1uoG988DzVvFA][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}])
+[2015-09-06 22:22:39,918][INFO ][cluster.metadata         ] [Miss America] [logstash-2015.09.07] creating index, cause [auto(bulk api)], templates [logstash], shards [5]/[1], mappings [_default_, logs]
+[2015-09-06 22:22:40,196][INFO ][cluster.metadata         ] [Miss America] [logstash-2015.09.07] update_mapping [logs] (dynamic)
+[2015-09-06 22:22:52,832][INFO ][cluster.metadata         ] [Miss America] [blog] update_mapping [user] (dynamic)
+[2015-09-06 22:26:40,381][INFO ][node                     ] [Miss America] stopping ...
+[2015-09-06 22:26:40,632][INFO ][node                     ] [Miss America] stopped
+[2015-09-06 22:26:40,632][INFO ][node                     ] [Miss America] closing ...
+[2015-09-06 22:26:40,637][INFO ][node                     ] [Miss America] closed

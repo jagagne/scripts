@@ -1,91 +1,23 @@
-[2015-09-05 19:07:50,849][INFO ][node                     ] [Devil-Slayer] version[1.7.1], pid[32853], build[b88f43f/2015-07-29T09:54:16Z]
-[2015-09-05 19:07:50,849][INFO ][node                     ] [Devil-Slayer] initializing ...
-[2015-09-05 19:07:51,026][INFO ][plugins                  ] [Devil-Slayer] loaded [], sites []
-[2015-09-05 19:07:51,111][INFO ][env                      ] [Devil-Slayer] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [160.6gb], net total_space [232.6gb], types [hfs]
-[2015-09-05 19:07:55,109][INFO ][node                     ] [Devil-Slayer] initialized
-[2015-09-05 19:07:55,113][INFO ][node                     ] [Devil-Slayer] starting ...
-[2015-09-05 19:07:55,336][INFO ][transport                ] [Devil-Slayer] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/192.168.1.6:9300]}
-[2015-09-05 19:07:55,366][INFO ][discovery                ] [Devil-Slayer] elasticsearch/nmQfTc5ZR2SpmFA-IrAoVQ
-[2015-09-05 19:07:59,187][INFO ][cluster.service          ] [Devil-Slayer] new_master [Devil-Slayer][nmQfTc5ZR2SpmFA-IrAoVQ][strife.local][inet[/192.168.1.6:9300]], reason: zen-disco-join (elected_as_master)
-[2015-09-05 19:07:59,213][INFO ][http                     ] [Devil-Slayer] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/192.168.1.6:9200]}
-[2015-09-05 19:07:59,213][INFO ][node                     ] [Devil-Slayer] started
-[2015-09-05 19:07:59,244][INFO ][gateway                  ] [Devil-Slayer] recovered [0] indices into cluster_state
-[2015-09-05 19:08:05,246][DEBUG][action.admin.cluster.health] [Devil-Slayer] observer: timeout notification from cluster service. timeout setting [5s], time since start [5s]
-[2015-09-05 19:08:32,813][INFO ][cluster.service          ] [Devil-Slayer] added {[logstash-strife.local-32862-11622][8uTUaVyZSJCkxfr0IcofSQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-receive(join from node[[logstash-strife.local-32862-11622][8uTUaVyZSJCkxfr0IcofSQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}])
-[2015-09-05 19:09:10,141][INFO ][cluster.metadata         ] [Devil-Slayer] [.kibana] creating index, cause [api], templates [], shards [1]/[1], mappings []
-[2015-09-05 19:09:10,738][INFO ][cluster.metadata         ] [Devil-Slayer] [.kibana] update_mapping [config] (dynamic)
-[2015-09-05 19:14:50,790][INFO ][cluster.metadata         ] [Devil-Slayer] [logstash-2015.09.05] creating index, cause [auto(bulk api)], templates [logstash], shards [5]/[1], mappings [_default_, logs]
-[2015-09-05 19:14:50,960][INFO ][cluster.metadata         ] [Devil-Slayer] [logstash-2015.09.05] update_mapping [logs] (dynamic)
-[2015-09-05 19:15:00,643][INFO ][cluster.service          ] [Devil-Slayer] removed {[logstash-strife.local-32862-11622][8uTUaVyZSJCkxfr0IcofSQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-node_failed([logstash-strife.local-32862-11622][8uTUaVyZSJCkxfr0IcofSQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}), reason transport disconnected
-[2015-09-05 19:16:15,081][INFO ][cluster.service          ] [Devil-Slayer] added {[logstash-strife.local-32934-11622][7sNswRv6SHq9PbIS1O5lRw][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-receive(join from node[[logstash-strife.local-32934-11622][7sNswRv6SHq9PbIS1O5lRw][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}])
-[2015-09-05 19:16:43,939][INFO ][cluster.metadata         ] [Devil-Slayer] [.kibana] create_mapping [index-pattern]
-[2015-09-05 19:16:44,370][INFO ][cluster.metadata         ] [Devil-Slayer] [.kibana] update_mapping [config] (dynamic)
-[2015-09-05 19:16:59,611][INFO ][cluster.metadata         ] [Devil-Slayer] [.kibana] create_mapping [search]
-[2015-09-05 21:50:58,414][INFO ][cluster.metadata         ] [Devil-Slayer] [test] creating index, cause [auto(index api)], templates [], shards [5]/[1], mappings [logs]
-[2015-09-05 21:50:58,570][DEBUG][action.index             ] [Devil-Slayer] [test][2], node[nmQfTc5ZR2SpmFA-IrAoVQ], [P], s[STARTED]: Failed to execute [index {[test][logs][1], source[{ hello world! }]}]
-org.elasticsearch.index.mapper.MapperParsingException: failed to parse
-	at org.elasticsearch.index.mapper.DocumentMapper.parse(DocumentMapper.java:565)
-	at org.elasticsearch.index.mapper.DocumentMapper.parse(DocumentMapper.java:493)
-	at org.elasticsearch.index.shard.IndexShard.prepareIndex(IndexShard.java:493)
-	at org.elasticsearch.action.index.TransportIndexAction.shardOperationOnPrimary(TransportIndexAction.java:192)
-	at org.elasticsearch.action.support.replication.TransportShardReplicationOperationAction$PrimaryPhase.performOnPrimary(TransportShardReplicationOperationAction.java:574)
-	at org.elasticsearch.action.support.replication.TransportShardReplicationOperationAction$PrimaryPhase$1.doRun(TransportShardReplicationOperationAction.java:440)
-	at org.elasticsearch.common.util.concurrent.AbstractRunnable.run(AbstractRunnable.java:36)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: org.elasticsearch.common.jackson.core.JsonParseException: Unexpected character ('w' (code 119)): was expecting a colon to separate field name and value
- at [Source: [B@4cc148d; line: 1, column: 10]
-	at org.elasticsearch.common.jackson.core.JsonParser._constructError(JsonParser.java:1487)
-	at org.elasticsearch.common.jackson.core.base.ParserMinimalBase._reportError(ParserMinimalBase.java:518)
-	at org.elasticsearch.common.jackson.core.base.ParserMinimalBase._reportUnexpectedChar(ParserMinimalBase.java:447)
-	at org.elasticsearch.common.jackson.core.json.UTF8StreamJsonParser._skipColon2(UTF8StreamJsonParser.java:2881)
-	at org.elasticsearch.common.jackson.core.json.UTF8StreamJsonParser._skipColon(UTF8StreamJsonParser.java:2856)
-	at org.elasticsearch.common.jackson.core.json.UTF8StreamJsonParser.nextToken(UTF8StreamJsonParser.java:704)
-	at org.elasticsearch.common.xcontent.json.JsonXContentParser.nextToken(JsonXContentParser.java:51)
-	at org.elasticsearch.index.mapper.DocumentMapper.parse(DocumentMapper.java:521)
-	... 9 more
-[2015-09-05 21:52:51,976][INFO ][cluster.metadata         ] [Devil-Slayer] [playground] creating index, cause [auto(index api)], templates [], shards [5]/[1], mappings [equipment]
-[2015-09-05 21:52:52,145][INFO ][cluster.metadata         ] [Devil-Slayer] [playground] update_mapping [equipment] (dynamic)
-[2015-09-05 22:03:39,055][INFO ][cluster.metadata         ] [Devil-Slayer] [logstash-2015.09.06] creating index, cause [auto(bulk api)], templates [logstash], shards [5]/[1], mappings [_default_, logs]
-[2015-09-05 22:03:39,225][INFO ][cluster.metadata         ] [Devil-Slayer] [logstash-2015.09.06] update_mapping [logs] (dynamic)
-[2015-09-05 22:04:14,317][INFO ][cluster.service          ] [Devil-Slayer] removed {[logstash-strife.local-32934-11622][7sNswRv6SHq9PbIS1O5lRw][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-node_failed([logstash-strife.local-32934-11622][7sNswRv6SHq9PbIS1O5lRw][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}), reason transport disconnected
-[2015-09-05 22:06:01,696][INFO ][node                     ] [Devil-Slayer] stopping ...
-[2015-09-05 22:06:01,854][INFO ][node                     ] [Devil-Slayer] stopped
-[2015-09-05 22:06:01,854][INFO ][node                     ] [Devil-Slayer] closing ...
-[2015-09-05 22:06:01,861][INFO ][node                     ] [Devil-Slayer] closed
-[2015-09-05 22:28:02,804][INFO ][node                     ] [Black Bolt] version[1.7.1], pid[33484], build[b88f43f/2015-07-29T09:54:16Z]
-[2015-09-05 22:28:02,805][INFO ][node                     ] [Black Bolt] initializing ...
-[2015-09-05 22:28:02,906][INFO ][plugins                  ] [Black Bolt] loaded [], sites []
-[2015-09-05 22:28:02,949][INFO ][env                      ] [Black Bolt] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [160.4gb], net total_space [232.6gb], types [hfs]
-[2015-09-05 22:28:05,955][INFO ][node                     ] [Black Bolt] initialized
-[2015-09-05 22:28:05,955][INFO ][node                     ] [Black Bolt] starting ...
-[2015-09-05 22:28:06,088][INFO ][transport                ] [Black Bolt] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/192.168.1.6:9300]}
-[2015-09-05 22:28:06,123][INFO ][discovery                ] [Black Bolt] elasticsearch/LQpbXWiAQlStbYE8TzfWPQ
-[2015-09-05 22:28:09,912][INFO ][cluster.service          ] [Black Bolt] new_master [Black Bolt][LQpbXWiAQlStbYE8TzfWPQ][strife.local][inet[/192.168.1.6:9300]], reason: zen-disco-join (elected_as_master)
-[2015-09-05 22:28:09,943][INFO ][http                     ] [Black Bolt] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/192.168.1.6:9200]}
-[2015-09-05 22:28:09,944][INFO ][node                     ] [Black Bolt] started
-[2015-09-05 22:28:09,994][INFO ][gateway                  ] [Black Bolt] recovered [5] indices into cluster_state
-[2015-09-05 22:32:14,247][INFO ][node                     ] [Black Bolt] stopping ...
-[2015-09-05 22:32:14,398][INFO ][node                     ] [Black Bolt] stopped
-[2015-09-05 22:32:14,398][INFO ][node                     ] [Black Bolt] closing ...
-[2015-09-05 22:32:14,404][INFO ][node                     ] [Black Bolt] closed
-[2015-09-05 22:46:33,281][INFO ][node                     ] [Scarlet Scarab] version[1.7.1], pid[33601], build[b88f43f/2015-07-29T09:54:16Z]
-[2015-09-05 22:46:33,283][INFO ][node                     ] [Scarlet Scarab] initializing ...
-[2015-09-05 22:46:33,546][INFO ][plugins                  ] [Scarlet Scarab] loaded [], sites []
-[2015-09-05 22:46:33,643][INFO ][env                      ] [Scarlet Scarab] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [160.5gb], net total_space [232.6gb], types [hfs]
-[2015-09-05 22:46:39,843][INFO ][node                     ] [Scarlet Scarab] initialized
-[2015-09-05 22:46:39,844][INFO ][node                     ] [Scarlet Scarab] starting ...
-[2015-09-05 22:46:40,119][INFO ][transport                ] [Scarlet Scarab] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/192.168.1.6:9300]}
-[2015-09-05 22:46:40,284][INFO ][discovery                ] [Scarlet Scarab] elasticsearch/z63Zjfk8Q1WjFcrUJC-uvA
-[2015-09-05 22:46:44,080][INFO ][cluster.service          ] [Scarlet Scarab] new_master [Scarlet Scarab][z63Zjfk8Q1WjFcrUJC-uvA][strife.local][inet[/192.168.1.6:9300]], reason: zen-disco-join (elected_as_master)
-[2015-09-05 22:46:44,147][INFO ][http                     ] [Scarlet Scarab] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/192.168.1.6:9200]}
-[2015-09-05 22:46:44,148][INFO ][node                     ] [Scarlet Scarab] started
-[2015-09-05 22:46:44,227][INFO ][gateway                  ] [Scarlet Scarab] recovered [5] indices into cluster_state
-[2015-09-05 22:46:49,446][INFO ][cluster.service          ] [Scarlet Scarab] added {[logstash-strife.local-33584-11622][RKmdsZ3ASmOkebeOaYJ-Vg][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-receive(join from node[[logstash-strife.local-33584-11622][RKmdsZ3ASmOkebeOaYJ-Vg][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}])
-[2015-09-05 22:52:51,472][INFO ][cluster.metadata         ] [Scarlet Scarab] [blog] creating index, cause [auto(index api)], templates [], shards [5]/[1], mappings [post]
-[2015-09-05 22:52:51,649][INFO ][cluster.metadata         ] [Scarlet Scarab] [blog] update_mapping [post] (dynamic)
-[2015-09-05 22:56:04,947][INFO ][node                     ] [Scarlet Scarab] stopping ...
-[2015-09-05 22:56:05,113][INFO ][node                     ] [Scarlet Scarab] stopped
-[2015-09-05 22:56:05,113][INFO ][node                     ] [Scarlet Scarab] closing ...
-[2015-09-05 22:56:05,124][INFO ][node                     ] [Scarlet Scarab] closed
+[2015-09-07 12:04:31,630][INFO ][node                     ] [Thing] version[1.7.1], pid[35218], build[b88f43f/2015-07-29T09:54:16Z]
+[2015-09-07 12:04:31,636][INFO ][node                     ] [Thing] initializing ...
+[2015-09-07 12:04:31,891][INFO ][plugins                  ] [Thing] loaded [], sites []
+[2015-09-07 12:04:31,967][INFO ][env                      ] [Thing] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [159.8gb], net total_space [232.6gb], types [hfs]
+[2015-09-07 12:04:36,982][INFO ][node                     ] [Thing] initialized
+[2015-09-07 12:04:36,982][INFO ][node                     ] [Thing] starting ...
+[2015-09-07 12:04:37,168][INFO ][transport                ] [Thing] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/192.168.1.6:9300]}
+[2015-09-07 12:04:37,217][INFO ][discovery                ] [Thing] elasticsearch/ZnmQfyXLRUOFrOiiu_2rSg
+[2015-09-07 12:04:41,035][INFO ][cluster.service          ] [Thing] new_master [Thing][ZnmQfyXLRUOFrOiiu_2rSg][strife.local][inet[/192.168.1.6:9300]], reason: zen-disco-join (elected_as_master)
+[2015-09-07 12:04:41,076][INFO ][http                     ] [Thing] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/192.168.1.6:9200]}
+[2015-09-07 12:04:41,077][INFO ][node                     ] [Thing] started
+[2015-09-07 12:04:41,134][INFO ][gateway                  ] [Thing] recovered [7] indices into cluster_state
+[2015-09-07 12:04:43,675][INFO ][cluster.service          ] [Thing] added {[logstash-strife.local-35196-11622][_yg0FMRsSsmepVYK9RpHtQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-receive(join from node[[logstash-strife.local-35196-11622][_yg0FMRsSsmepVYK9RpHtQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}])
+[2015-09-07 12:07:54,843][INFO ][cluster.metadata         ] [Thing] [movies] creating index, cause [auto(index api)], templates [], shards [5]/[1], mappings [movie]
+[2015-09-07 12:07:54,993][INFO ][cluster.metadata         ] [Thing] [movies] update_mapping [movie] (dynamic)
+[2015-09-07 12:21:29,583][INFO ][cluster.service          ] [Thing] removed {[logstash-strife.local-35196-11622][_yg0FMRsSsmepVYK9RpHtQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-node_failed([logstash-strife.local-35196-11622][_yg0FMRsSsmepVYK9RpHtQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}), reason transport disconnected
+[2015-09-07 12:21:49,927][INFO ][cluster.service          ] [Thing] added {[logstash-strife.local-35271-11622][gvcdU2TRQwuF5bOlLC4EnA][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-receive(join from node[[logstash-strife.local-35271-11622][gvcdU2TRQwuF5bOlLC4EnA][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}])
+[2015-09-07 12:23:05,659][INFO ][cluster.metadata         ] [Thing] [logstash-2015.09.07] update_mapping [logs] (dynamic)
+[2015-09-07 12:24:45,827][INFO ][cluster.metadata         ] [Thing] [logstash-2015.09.07] update_mapping [logs] (dynamic)
+[2015-09-07 12:26:10,179][INFO ][cluster.service          ] [Thing] removed {[logstash-strife.local-35271-11622][gvcdU2TRQwuF5bOlLC4EnA][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-node_failed([logstash-strife.local-35271-11622][gvcdU2TRQwuF5bOlLC4EnA][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}), reason transport disconnected
+[2015-09-07 12:26:28,722][INFO ][cluster.service          ] [Thing] added {[logstash-strife.local-35296-11622][g93O4CCaRguV2dHTs6W9SQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-receive(join from node[[logstash-strife.local-35296-11622][g93O4CCaRguV2dHTs6W9SQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}])
+[2015-09-07 12:28:00,331][INFO ][cluster.metadata         ] [Thing] [logstash-2015.09.07] update_mapping [logs] (dynamic)
+[2015-09-07 12:28:00,633][INFO ][cluster.metadata         ] [Thing] [logstash-2015.09.07] update_mapping [logs] (dynamic)
