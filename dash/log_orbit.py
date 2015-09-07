@@ -8,7 +8,7 @@ def arp_display(pkt):
     if pkt[ARP].psrc == '0.0.0.0': # ARP Probe
 
 	if pkt[ARP].hwsrc == 'f0:4f:7c:f6:bc:14':
-		os.system('sh /Users/jagagne/Documents/scripts/dash/curl_to_logstash.sh')
+		os.system('sh curl_to_logstash.sh')
 		print "3 - Dirty Mouth?"
 	else:
 		print "ARP probe from unknown device: " + pkt[ARP].hwsrc

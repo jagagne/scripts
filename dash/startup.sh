@@ -5,4 +5,4 @@
 #/Users/jagagne/Documents/scripts/elk/elasticsearch/bin/elasticsearch
 #/Users/jagagne/Documents/scripts/elk/kibana/kibana
 
-nohup python log_orbit.py &
+python log_orbit.py &

@@ -21,3 +21,9 @@
 [2015-09-07 12:26:28,722][INFO ][cluster.service          ] [Thing] added {[logstash-strife.local-35296-11622][g93O4CCaRguV2dHTs6W9SQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true},}, reason: zen-disco-receive(join from node[[logstash-strife.local-35296-11622][g93O4CCaRguV2dHTs6W9SQ][strife.local][inet[/192.168.1.6:9301]]{data=false, client=true}])
 [2015-09-07 12:28:00,331][INFO ][cluster.metadata         ] [Thing] [logstash-2015.09.07] update_mapping [logs] (dynamic)
 [2015-09-07 12:28:00,633][INFO ][cluster.metadata         ] [Thing] [logstash-2015.09.07] update_mapping [logs] (dynamic)
+[2015-09-07 13:44:05,142][INFO ][cluster.metadata         ] [Thing] [.kibana] create_mapping [dashboard]
+[2015-09-07 13:44:17,545][INFO ][cluster.metadata         ] [Thing] [.kibana] create_mapping [visualization]
+[2015-09-07 14:01:07,243][INFO ][node                     ] [Thing] stopping ...
+[2015-09-07 14:01:07,422][INFO ][node                     ] [Thing] stopped
+[2015-09-07 14:01:07,423][INFO ][node                     ] [Thing] closing ...
+[2015-09-07 14:01:07,432][INFO ][node                     ] [Thing] closed
